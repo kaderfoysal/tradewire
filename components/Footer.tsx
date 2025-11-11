@@ -4,140 +4,135 @@ import React from 'react';
 import Link from 'next/link';
 import { FaFacebook, FaTwitter, FaLinkedin, FaYoutube, FaInstagram, FaArrowUp } from 'react-icons/fa';
 
-interface FooterLink {
-  name: string;
-  href: string;
-}
-
-interface FooterSection {
-  title: string;
-  links: FooterLink[];
-}
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth' as ScrollBehavior
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const footerSections: FooterSection[] = [
+  const footerLinks = [
     {
       title: 'Company',
       links: [
-        { name: 'About Us', href: '/about' },
+        { name: 'About', href: '/about' },
         { name: 'Contact', href: '/contact' },
         { name: 'Careers', href: '/careers' },
-        { name: 'Advertise', href: '/advertise' }
-      ]
+      ],
+    },
+    {
+      title: 'Resources',
+      links: [
+        { name: 'Blog', href: '/blog' },
+        { name: 'Support', href: '/support' },
+        { name: 'Advertise', href: '/advertise' },
+      ],
     },
     {
       title: 'Legal',
       links: [
-        { name: 'Terms of Use', href: '/terms' },
-        { name: 'Privacy Policy', href: '/privacy' },
-        { name: 'Cookie Policy', href: '/cookies' },
-        { name: 'GDPR', href: '/gdpr' }
-      ]
+        { name: 'Privacy', href: '/privacy' },
+        { name: 'Terms', href: '/terms' },
+        { name: 'Cookies', href: '/cookies' },
+      ],
     },
-    {
-      title: 'Categories',
-      links: [
-        { name: 'Business', href: '/business' },
-        { name: 'Markets', href: '/markets' },
-        { name: 'Technology', href: '/tech' },
-        { name: 'Economy', href: '/economy' }
-      ]
-    }
   ];
 
   const socialLinks = [
-    { icon: <FaFacebook />, href: '#', label: 'Facebook' },
-    { icon: <FaTwitter />, href: '#', label: 'Twitter' },
-    { icon: <FaLinkedin />, href: '#', label: 'LinkedIn' },
-    { icon: <FaYoutube />, href: '#', label: 'YouTube' },
-    { icon: <FaInstagram />, href: '#', label: 'Instagram' }
+    { icon: <FaFacebook />, href: '#', label: 'Facebook', color: 'hover:text-blue-500' },
+    { icon: <FaTwitter />, href: '#', label: 'Twitter', color: 'hover:text-sky-400' },
+    { icon: <FaLinkedin />, href: '#', label: 'LinkedIn', color: 'hover:text-blue-600' },
+    { icon: <FaYoutube />, href: '#', label: 'YouTube', color: 'hover:text-red-500' },
+    { icon: <FaInstagram />, href: '#', label: 'Instagram', color: 'hover:text-pink-500' },
   ];
 
   return (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          {/* Brand Info */}
-          <div>
-            <h2 className="text-2xl font-bold mb-4">Tradrewire</h2>
-            <p className="text-gray-400 mb-4">
-              Your trusted source for the latest business news and financial insights.
-            </p>
-            <div className="flex space-x-4">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="text-gray-400 hover:text-white transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {social.icon}
-                </a>
-              ))}
-            </div>
+    <footer className="relative bg-gradient-to-b from-gray-900 to-black text-gray-400 py-16">
+      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-12">
+        
+        {/* Brand Section - Wider Column */}
+        <div>
+          <h2 className="text-white text-2xl font-extrabold mb-4">Tradrewire</h2>
+
+          <p className="text-sm text-gray-400 mb-4">
+            <span className="font-semibold text-white">Editor & Publisher:</span> Farhana Chowdhury
+          </p>
+          <div className="text-sm text-gray-400 space-y-1">
+            <p>166/1667, Shahid Syed Nazrul Islam Sarani,</p>
+            <p>Al Razi Complex, Bijoy Nagar, Paltan,</p>
+            <p>Dhaka, Bangladesh</p>
           </div>
 
-          {/* Footer Sections */}
-          {footerSections.map((section) => (
-            <div key={section.title}>
-              <h3 className="text-lg font-semibold mb-4">{section.title}</h3>
-              <ul className="space-y-2">
-                {section.links.map((link) => (
-                  <li key={link.name}>
-                    <Link 
-                      href={link.href}
-                      className="text-gray-400 hover:text-white transition-colors text-sm"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-
-          {/* Newsletter */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Newsletter</h3>
-            <p className="text-gray-400 text-sm mb-4">
-              Subscribe for the latest updates and news.
-            </p>
-            <form className="space-y-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-grow px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <button className="bg-blue-700 hover:bg-blue-800 text-white font-medium px-6 py-2 rounded-md transition-colors">
-                Subscribe
-              </button>
-            </form>
-            <button 
-              onClick={scrollToTop}
-              className="mt-4 flex items-center text-gray-400 hover:text-white transition-colors text-sm"
-              aria-label="Back to top"
-            >
-              <FaArrowUp className="mr-1" /> Back to top
-            </button>
+          <div className="flex space-x-4 mt-5">
+            {socialLinks.map((s, idx) => (
+              <a
+                key={idx}
+                href={s.href}
+                aria-label={s.label}
+                className={`text-gray-400 ${s.color} transition-colors duration-300`}
+              >
+                {s.icon}
+              </a>
+            ))}
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-gray-800 pt-6 text-center text-gray-500 text-sm">
-          <p>© {currentYear} Tradrewire. All rights reserved.</p>
+        {/* Dynamic Footer Links */}
+        {footerLinks.map((section, index) => (
+          <div key={index}>
+            <h3 className="text-white font-semibold text-lg mb-4">{section.title}</h3>
+            <ul className="space-y-2">
+              {section.links.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-400 hover:text-white text-sm transition-colors duration-300"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+
+        {/* Newsletter */}
+        <div>
+          <h3 className="text-white font-semibold text-lg mb-4">Stay Updated</h3>
+          <p className="text-sm text-gray-400 mb-4">
+            Subscribe for exclusive insights and updates.
+          </p>
+          <form className="flex flex-col sm:flex-row items-center gap-3">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="submit"
+              className="w-full sm:w-auto bg-blue-700 hover:bg-blue-800 text-white font-medium px-6 py-2 rounded-md transition-colors"
+            >
+              Subscribe
+            </button>
+          </form>
         </div>
       </div>
+
+      {/* Divider */}
+      <div className="mt-12 border-t border-gray-800 pt-6 text-center">
+        <p className="text-sm text-gray-500">
+          © {currentYear} Tradrewire — All rights reserved.
+        </p>
+      </div>
+
+      {/* Back to top button */}
+      <button
+        onClick={scrollToTop}
+        aria-label="Back to top"
+        className="fixed bottom-6 right-6 bg-blue-700 hover:bg-blue-800 text-white p-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        <FaArrowUp className="w-5 h-5" />
+      </button>
     </footer>
   );
 };
